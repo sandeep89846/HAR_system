@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    tools:context=".MainActivity">
+
+    <!-- Start Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonStart"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="START RECORDING SESSION"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:layout_marginBottom="12dp"
+        app:backgroundTint="@color/button_purple" /> <!-- Explicit Purple color -->
+
+    <!-- Stop Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonStop"
+        style="@style/Widget.MaterialComponents.Button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="STOP RECORDING SESSION"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:layout_marginBottom="24dp"
+    android:enabled="false"
+    app:backgroundTint="@color/stop_button_tint" /> <!-- Use the color state list -->
+
+
+    <!-- Status Display -->
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Stopped"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_marginTop="20dp"
+    android:layout_marginBottom="16dp" />
+
+    <!-- Sensor Data Table -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1,2,3"
+    android:layout_marginBottom="16dp">
+
+    <!-- Header Row -->
+    <TableRow android:layout_marginBottom="4dp">
+        <TextView
+            android:text="Sensor"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_column="0"
+            android:paddingEnd="8dp"/>
+        <TextView
+            android:text="X"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_column="1"/>
+        <TextView
+            android:text="Y"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_column="2"/>
+        <TextView
+            android:text="Z"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+            android:layout_column="3"/>
+    </TableRow>
+
+    <!-- Accelerometer Row -->
+    <TableRow android:layout_marginBottom="4dp">
+        <TextView
+            android:text="Accelerometer"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_column="0"/>
+        <TextView
+            android:id="@+id/textViewAccelX"
+            android:text="N/A"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_column="1"/>
+        <TextView
+            android:id="@+id/textViewAccelY"
+            android:text="N/A"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_column="2"/>
+        <TextView
+            android:id="@+id/textViewAccelZ"
+            android:text="N/A"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_column="3"/>
+    </TableRow>
+
+    <!-- Gyroscope Row -->
+    <TableRow>
+        <TextView
+            android:text="Gyroscope"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_column="0"/>
+        <TextView
+            android:id="@+id/textViewGyroX"
+            android:text="N/A"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_column="1"/>
+        <TextView
+            android:id="@+id/textViewGyroY"
+            android:text="N/A"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_column="2"/>
+        <TextView
+            android:id="@+id/textViewGyroZ"
+            android:text="N/A"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_column="3"/>
+    </TableRow>
+
+</TableLayout>
+
+    <!-- Save Confirmation Text -->
+<TextView
+android:id="@+id/textViewSaveConfirmation"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginTop="16dp"
+android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+android:textColor="?android:attr/textColorSecondary"
+tools:text="Saved to Activity_Subject_Timestamp.csv" /> <!-- Example text for preview -->
+
+    </LinearLayout>
