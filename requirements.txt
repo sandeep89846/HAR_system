@@ -1,0 +1,10 @@
+tensorflow>=2.x
+scikit-learn
+numpy
+pandas
+flask
+flask-socketio
+python-engineio
+python-socketio
+joblib
+matplotlib

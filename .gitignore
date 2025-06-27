@@ -1,0 +1,21 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.log
+.ipynb_checkpoints/
+
+# Android
+.gradle/
+/local.properties
+.idea/
+.DS_Store
+build/
+*.apk
+*.ap_
+*.jar
+*.dex
+*.iml
+*.class
+.externalNativeBuild/
+.cxx/
