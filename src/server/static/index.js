@@ -85,3 +85,30 @@ function connectWebSocket() {
         updateInsightsDisplay(); // Refresh insights based on new data and current selection
     });
 }
+
+// --- Event Listeners ---
+function setupEventListeners() {
+    timeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active button style
+            timeButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // Set selected duration and update insights
+            selectedInsightDuration = parseInt(button.dataset.duration) * 60 * 1000;
+            updateInsightsDisplay();
+        });
+    });
+}
+
+// --- Update Functions ---
+
+function updateServerStatus(isConnected, statusText = null) {
+    if (isConnected) {
+        serverStatusEl.textContent = statusText || 'Connected';
+        serverIndicator.className = 'status-indicator ok'; // Green
+    } else {
+        serverStatusEl.textContent = statusText || 'Disconnected';
+        serverIndicator.className = 'status-indicator error'; // Red
+    }
+}
