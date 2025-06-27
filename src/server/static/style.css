@@ -1,0 +1,308 @@
+/* --- General Styles --- */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1400px; /* Wider container */
+  margin: 20px auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #1a2b4e;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 600;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+}
+
+h3 {
+   color: #555;
+   margin-top: 20px;
+   margin-bottom: 10px;
+   font-size: 1.1em;
+   display: flex;
+   align-items: center;
+}
+
+/* --- Icons (Simple Example - Replace with actual icons if desired) --- */
+h2 i, h3 i {
+  margin-right: 8px;
+  font-style: normal; /* Prevent italics if using <i> */
+  /* Placeholder - Use background images, font icons (FontAwesome), or SVGs */
+   display: inline-block; width: 1em; height: 1em;
+   /* background-color: #ccc; border-radius: 3px; */ /* Example placeholder */
+}
+.icon-server::before { content: "☁️"; } /* Example emoji icons */
+.icon-config::before { content: "⚙️"; }
+.icon-clients::before { content: "📱"; }
+.icon-insights::before { content: "📊"; }
+
+
+/* --- Layout --- */
+.dashboard-layout {
+  display: flex;
+  gap: 20px; /* Space between columns */
+  align-items: flex-start; /* Align items to the top */
+}
+
+.main-content {
+  flex: 3; /* Takes up more space */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar {
+  flex: 2; /* Takes up less space */
+  position: sticky; /* Make sidebar sticky */
+  top: 20px; /* Stick near the top */
+  background-color: #fff; /* Ensure background for sticky */
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  margin-bottom: 20px; /* Add margin for non-flex layouts */
+}
+
+/* --- Status Section --- */
+.status-section .status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 10px 20px; /* Row and column gap */
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.95em;
+}
+
+.status-label {
+  font-weight: 600;
+  min-width: 110px;
+  display: inline-block;
+  color: #555;
+  margin-left: 5px;
+}
+
+.status-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc; /* Default grey */
+  margin-right: 8px;
+  transition: background-color 0.3s ease;
+}
+.status-indicator.ok { background-color: #28a745; } /* Green */
+.status-indicator.error { background-color: #dc3545; } /* Red */
+.status-indicator.neutral { background-color: #ffc107; } /* Yellow/Orange */
+
+/* Special style for client count indicator */
+.status-indicator.count {
+  background-color: #17a2b8; /* Cyan */
+  /* Optional: Animate if count > 0 */
+}
+.status-indicator.count.active {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(23, 162, 184, 0.7); }
+  70% { transform: scale(1.1); box-shadow: 0 0 5px 10px rgba(23, 162, 184, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(23, 162, 184, 0); }
+}
+
+
+/* --- Config Section --- */
+.config-info {
+   font-size: 0.9em;
+   color: #666;
+   margin-top: 15px;
+   border-top: 1px dashed #eee;
+   padding-top: 15px;
+}
+.config-item {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+.config-label {
+   font-weight: 600;
+   min-width: 80px; /* Reduced width */
+   display: inline-block;
+   color: #555;
+}
+#config-classes {
+  font-family: monospace;
+  font-size: 0.95em;
+}
+
+/* --- Clients Section --- */
+#clients-list {
+  max-height: 400px; /* Limit height and make scrollable if needed */
+  overflow-y: auto;
+  padding-right: 5px; /* Space for scrollbar */
+}
+
+.client-card {
+  border: 1px solid #e0e0e0;
+  border-left: 5px solid #007bff; /* Accent border */
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fdfdfd;
+  transition: background-color 0.2s ease;
+}
+.client-card:hover {
+  background-color: #f8f9fa;
+}
+
+.client-sid {
+  font-weight: bold;
+  color: #0056b3;
+  font-family: monospace;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.prediction {
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+.prediction-label {
+  font-weight: 600;
+  min-width: 90px;
+  display: inline-block;
+  color: #444;
+}
+.prediction-activity {
+  /* Colors are set dynamically via JS/Style attribute */
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: white; /* Default, overridden by specific colors */
+  font-size: 1.05em;
+}
+.prediction-confidence {
+  color: #555;
+  font-size: 0.9em;
+}
+.last-update-time {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 8px;
+  text-align: right;
+}
+.no-clients {
+  text-align: center;
+  color: #888;
+  padding: 30px 15px;
+  font-style: italic;
+}
+
+/* --- Insights Section (Sidebar) --- */
+.insight-controls {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap; /* Allow buttons to wrap */
+}
+.insight-controls label {
+  font-weight: 600;
+  color: #555;
+}
+.time-btn {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.9em;
+}
+.time-btn:hover {
+  background-color: #e9ecef;
+  border-color: #bbb;
+}
+.time-btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+  font-weight: bold;
+}
+
+#insights-area {
+  margin-top: 15px;
+  min-height: 100px; /* Ensure area has some height even when empty */
+}
+
+.insight-client-container {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.insight-client-container .client-sid { /* Reuse client-sid style */
+  margin-bottom: 5px;
+  font-size: 1em; /* Slightly larger for insight title */
+}
+
+.insight-timeline-bar {
+  width: 100%;
+  height: 30px; /* Height of the timeline */
+  background-color: #e9ecef;
+  border-radius: 4px;
+  position: relative; /* For positioning activity blocks */
+  overflow: hidden; /* Hide overflow */
+  margin-top: 10px;
+}
+
+.insight-activity-block {
+  position: absolute;
+  height: 100%;
+  /* Width is set by JS */
+  top: 0;
+  /* Left is set by JS */
+  /* Background color set by JS */
+  opacity: 0.85;
+  transition: background-color 0.3s ease, left 0.3s ease, width 0.3s ease;
+  box-sizing: border-box; /* Include border in width/height */
+  border-right: 1px solid rgba(255, 255, 255, 0.3); /* Subtle separator */
+}
+/* Add tooltips later if needed */
+
+/* --- Activity Specific Colors --- */
+/* Defined here for reference, but applied via JS style attribute */
+/* Add all your activities from activity_map */
+.activity-walking { background-color: #28a745; } /* Green */
+.activity-jogging { background-color: #fd7e14; } /* Orange */
+.activity-using-stairs { background-color: #ffc107; } /* Yellow */
+.activity-sitting { background-color: #17a2b8; } /* Cyan */
+.activity-standing { background-color: #6f42c1; } /* Purple */
+.activity-unknown { background-color: #6c757d; } /* Grey */
