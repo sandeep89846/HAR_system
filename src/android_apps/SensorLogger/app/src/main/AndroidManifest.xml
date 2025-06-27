@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/> <!-- General foreground service permission -->
+    <!-- Specific permission required for 'health' type on API 34+ -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_HEALTH"/>
+    <!-- Required for Android 13 (API 33+) to show notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Required to keep the CPU running when the screen is off -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Declare required sensor features -->
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true"/>
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SensorLogger"
+        tools:targetApi="34"> <!-- Target API 34 or higher recommended -->
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- Service Declaration - Uses 'health' foreground service type -->
+        <service
+            android:name=".SensorCollectionService"
+            android:exported="false"
+            android:foregroundServiceType="health"/>
+
+    </application>
+
+</manifest>
