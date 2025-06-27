@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR TCN Dashboard</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HAR TCN Real-time Dashboard</h1>
+        </header>
+
+        <main class="dashboard-layout">
+            <!-- Left Column: Status and Live Clients -->
+            <section class="main-content">
+                <div class="status-section card">
+                    <h2><i class="icon-server"></i> Server Status</h2>
+                    <div class="status-grid">
+                        <div class="status-item">
+                            <span class="status-indicator" id="server-indicator"></span>
+                            <span class="status-label">Server:</span>
+                            <span id="server-status">Connecting...</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-indicator" id="model-indicator"></span>
+                            <span class="status-label">Model Loaded:</span>
+                            <span id="model-status">?</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-indicator" id="scaler-indicator"></span>
+                            <span class="status-label">Scaler Loaded:</span>
+                            <span id="scaler-status">?</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-indicator" id="encoder-indicator"></span>
+                            <span class="status-label">Encoder Loaded:</span>
+                            <span id="encoder-status">?</span>
+                        </div>
+                        <div class="status-item">
+                             <span class="status-indicator count" id="client-count-indicator"></span>
+                            <span class="status-label">Mobile Clients:</span>
+                            <span id="client-count">0</span>
+                        </div>
+                    </div>
+                     <div class="config-info">
+                         <h3><i class="icon-config"></i> Configuration</h3>
+                         <div class="config-item"><span class="config-label">Window:</span> <span id="config-window">--</span> samples</div>
+                         <div class="config-item"><span class="config-label">Stride:</span> <span id="config-stride">--</span> samples</div>
+                         <div class="config-item"><span class="config-label">Rate:</span> <span id="config-rate">--</span> Hz</div>
+                         <div class="config-item"><span class="config-label">Features:</span> <span id="config-features">--</span></div>
+                         <div class="config-item"><span class="config-label">Classes:</span> <span id="config-classes">--</span></div>
+                     </div>
+                </div>
+
+                <div class="clients-section card">
+                    <h2><i class="icon-clients"></i> Live Client Predictions</h2>
+                    <div id="clients-list">
+                        <div class="no-clients">Waiting for mobile clients to connect...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column: Insights -->
+            <aside class="sidebar card">
+                <h2><i class="icon-insights"></i> Activity Insights</h2>
+                <div class="insight-controls">
+                    <label>Show History:</label>
+                    <button class="time-btn active" data-duration="5">Last 5 min</button>
+                    <button class="time-btn" data-duration="1">Last 1 min</button>
+                    <button class="time-btn" data-duration="30">Last 30 min</button>
+                </div>
+                <div id="insights-area">
+                     <div class="no-clients">No client data available for insights.</div>
+                    <!-- Insight bars will be dynamically added here -->
+                </div>
+            </aside>
+        </main>
+
+    </div> <!-- /container -->
+
+    <!-- Include Socket.IO Client Library -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+    <!-- Link to the JavaScript file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
