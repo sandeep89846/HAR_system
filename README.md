@@ -253,10 +253,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **Institution**: Atal Bihari Vajpayee Indian Institute of Information Technology and Management Gwalior
 
-## 📞 Support
-
-For questions or issues, please open an issue on GitHub or contact the development team.
-
 ## 🙏 Acknowledgments
 
 - WISDM team for providing the public dataset
