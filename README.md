@@ -34,6 +34,7 @@ pip install tensorflow numpy pandas scikit-learn flask flask-socketio joblib
 ### Model Setup
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd human-activity-recognition
@@ -63,6 +64,7 @@ cd human-activity-recognition
 ### Real-Time Classification
 
 1. Start the prediction server:
+
 ```bash
 cd server
 python TCN_Predictor.py
@@ -75,33 +77,95 @@ python TCN_Predictor.py
 ### Training Your Own Model
 
 1. Prepare your data using the provided notebook:
+
 ```bash
 jupyter notebook src/notebook/TCNonOwnData.ipynb
 ```
 
 2. Follow the preprocessing and training steps in the notebook
 
+## 🫠 Customizing the TCN Model for Your Dataset
+
+The training pipeline is built to be modular and configurable. If your dataset follows the expected format (see required columns in the script), you do **not** need to rewrite major parts of the code. Instead, focus on **tuning model parameters** to match the temporal characteristics of your data.
+
+### 🔧 Where to Modify
+
+Open the training script (`TCNonOwnData.ipynb` or `tcnonowndata.py`) and scroll to the section labeled:
+
+```python
+# --- Model Hyperparameters ---
+```
+
+These constants control how the Temporal Convolutional Network behaves.
+
+### 📏 Key Concepts
+
+For most time-series activity data, the default configuration works well. However, depending on your specific use case (e.g., shorter activities, higher/lower sampling rate), you may want to tune the **receptive field** of the model — the amount of temporal context it uses to make a prediction.
+
+### 🧩 Parameters that Affect the Receptive Field:
+
+
+
+- **Default**: `7`
+- Larger values allow each convolution to cover more time steps.
+- Increase if your signal patterns are smoother or slower-changing.
+
+<br/>
+
+- **Default**: `5`
+- The number of residual blocks stacked together.
+- More blocks = deeper temporal context.
+- Reducing to `3–4` works better for fast, short-duration activities.
+
+<br/>
+
+- **Default**: `[2**i for i in range(NUM_TCN_BLOCKS)]` → `[1, 2, 4, 8, 16]`
+- Exponentially increases the gap between filter taps — critical for modeling long-range dependencies.
+- You can customize this to `[1, 2, 4]` (for short-term focus) or `[1, 2, 4, 8, 16, 32]` (for longer sequences).
+
+### ✅ Example Configuration:
+
+```python
+KERNEL_SIZE = 9
+NUM_TCN_BLOCKS = 6
+DILATION_RATES = [1, 2, 4, 8, 16, 32]  # Receptive field grows significantly
+```
+
+No additional code changes are needed — simply adjust these parameters and re-run the script. The training pipeline will automatically handle:
+
+- Windowing
+- Splitting
+- Label encoding
+- Feature scaling
+- Model training
+- Evaluation and result saving
+
+This makes it easy to experiment and fine-tune the model for your own sensor data.
+
 ## 📊 Model Performance
 
 ### Offline Test Results
+
 - **Overall Accuracy**: 99.64%
 - **Test Loss**: 0.0339
 
-| Activity | Precision | Recall | F1-Score | Support |
-|----------|-----------|--------|----------|---------|
-| Walking | 1.0000 | 0.9932 | 0.9966 | 4099 |
-| Jogging | 1.0000 | 1.0000 | 1.0000 | 2892 |
-| Using Stairs | 0.9883 | 1.0000 | 0.9941 | 1010 |
-| Sitting | 0.9947 | 0.9953 | 0.9950 | 3010 |
-| Standing | 0.9927 | 0.9973 | 0.9950 | 3010 |
+| Activity     | Precision | Recall | F1-Score | Support |
+| ------------ | --------- | ------ | -------- | ------- |
+| Walking      | 1.0000    | 0.9932 | 0.9966   | 4099    |
+| Jogging      | 1.0000    | 1.0000 | 1.0000   | 2892    |
+| Using Stairs | 0.9883    | 1.0000 | 0.9941   | 1010    |
+| Sitting      | 0.9947    | 0.9953 | 0.9950   | 3010    |
+| Standing     | 0.9927    | 0.9973 | 0.9950   | 3010    |
 
 ### Real-World Validation
+
 - **Validation Run 1**: 91.68% accuracy on unseen subject
 - **Validation Run 2**: 91.06% accuracy on unseen subject
 
 ## 🏗️ Technical Details
 
 ### Model Architecture
+
 - **Model Type**: Temporal Convolutional Network (TCN)
 - **Input**: 60 time steps (3 seconds) × 6 features (3-axis accel + 3-axis gyro)
 - **Sampling Rate**: 20 Hz
@@ -109,12 +173,14 @@ jupyter notebook src/notebook/TCNonOwnData.ipynb
 - **Receptive Field**: 9.35 seconds
 
 ### Key Components
+
 - **5 TCN Residual Blocks** with dilated convolutions
 - **Dilation Rates**: [1, 2, 4, 8, 16]
 - **Global Average Pooling** for temporal dimension reduction
 - **Regularization**: Spatial Dropout, Standard Dropout, L2 regularization
 
 ### Data Sources
+
 - **WISDM Dataset**: For Jogging, Sitting, Standing activities
 - **Custom Collected Data**: For Walking and Using Stairs activities
 
@@ -141,24 +207,26 @@ jupyter notebook src/notebook/TCNonOwnData.ipynb
 ## 🔧 Configuration
 
 ### Server Configuration
+
 Edit `TCN_Predictor.py` to modify:
+
 - Server host/port
 - Model file paths
 - Buffer sizes
 - Prediction parameters
 
 ### Data Collection Configuration
+
 - **Sampling Rate**: 20 Hz (configurable in Android apps)
 - **Activities**: A=Walking, B=Jogging, C=Using Stairs, D=Sitting, E=Standing
 
-## 🚀 Future Enhancements
+### Datasets used for training
+- **WISDM Dataset**: Public dataset for Jogging, Sitting, Standing. This data was preprocessed and resampled at 20Hz again before training and made into a csv file titled [resampled_normalized_phone_data.csv](https://drive.google.com/file/d/1dinzrzwi-d32mmo2t-e9VFCZQTZcJJcL/view?usp=sharing).
 
-- [ ] On-device inference using TensorFlow Lite
-- [ ] Support for additional activities
-- [ ] Multi-modal sensor fusion (barometer, magnetometer)
-- [ ] Improved transition handling
-- [ ] Model personalization and adaptation
-- [ ] Energy efficiency optimizations
+- We have collected data ourselves for Walking and Using stairs and the data from various user was compiled in a csv file titled as
+[combined_collected_data.csv](https://drive.google.com/file/d/1-0GJBWYzEoJe-EB1T0S6iE-2hH8xJ_Qo/view?usp=sharing).
+
+
 
 ## 📚 Research Background
 
@@ -178,11 +246,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👥 Authors
 
-- Ajay Kumar Meena 
-- Gontu Sandeep Kumar 
-- Prabhat Kumar 
-- Vikash Kumar 
-
+- Ajay Kumar Meena
+- Gontu Sandeep Kumar
+- Prabhat Kumar
+- Vikash Kumar
 
 **Institution**: Atal Bihari Vajpayee Indian Institute of Information Technology and Management Gwalior
 
@@ -195,3 +262,7 @@ For questions or issues, please open an issue on GitHub or contact the developme
 - WISDM team for providing the public dataset
 - TensorFlow and scikit-learn communities
 - Android development resources and documentation
+
+---
+
+
