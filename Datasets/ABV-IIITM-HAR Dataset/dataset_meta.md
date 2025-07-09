@@ -1,0 +1,63 @@
+# ABV-IIITM-HAR Dataset Description
+
+## Overview
+This dataset contains smartphone sensor data collected from multiple participants performing various physical activities. Each top-level folder (e.g., `01`, `02`, ..., `11`) represents data collected by a unique participant.
+
+## Folder Structure
+- Each participant folder contains subfolders, each corresponding to a specific activity session.
+- The first three letters of each subfolder indicate the activity:
+    - `cyc`: Cycling
+    - `wlk`: Walking
+    - `ups`: Upstairs (ascending stairs)
+    - `dws`: Downstairs (descending stairs)
+    - `idl`: Idle (no movement)
+    - `jog`: Running (jogging)
+
+## Data Collection
+- Data was recorded using the **Sensor Logger** app:
+    - [Play Store](https://play.google.com/store/apps/details?id=com.kelvin.sensorapp&hl=en_IN)
+    - [App Store](https://apps.apple.com/us/app/sensor-logger/id1531582925)
+- Each activity folder contains CSV files with sensor data:
+    - `Accelerometer.csv`
+    - `Gyroscope.csv`
+    - (Optionally) `AccelerometerUncalibrated.csv`, `GyroscopeUncalibrated.csv`, and others.
+
+## CSV File Structure
+**Example: Accelerometer.csv and Gyroscope.csv**
+
+| Column Name     | Description                                                                 |
+|-----------------|-----------------------------------------------------------------------------|
+| `time`          | Raw timestamp in nanoseconds (since epoch, as recorded by the device)        |
+| `seconds_elapsed` | Time elapsed in seconds since the start of the recording                  |
+| `z`             | Sensor reading along the Z-axis (m/s² for accelerometer, rad/s for gyroscope)|
+| `y`             | Sensor reading along the Y-axis (m/s² for accelerometer, rad/s for gyroscope)|
+| `x`             | Sensor reading along the X-axis (m/s² for accelerometer, rad/s for gyroscope)|
+
+- **Accelerometer.csv**: Contains linear acceleration data along the three axes (x, y, z).
+- **Gyroscope.csv**: Contains angular velocity data along the three axes (x, y, z).
+- The axes are defined according to the smartphone's orientation as per Android/iOS standards.
+
+## Notes
+- Each row in the CSV files represents a single sensor reading at a specific timestamp.
+- The `seconds_elapsed` column is useful for aligning data across different sensors or sessions.
+- The data can be used for human activity recognition (HAR), time-series analysis, and machine learning applications.
+
+## Annotation.csv
+- In some folders, an `Annotation.csv` file may be present for manual or automatic labeling, but it may be empty or unused in this dataset.
+
+## Uncalibrated Sensor Files
+- Files like `AccelerometerUncalibrated.csv` and `GyroscopeUncalibrated.csv` (if present) contain raw sensor data before device calibration. Their columns are typically similar but may include additional bias or offset columns.
+
+## Data Coverage per Activity
+
+| Activity     | Total Minutes |
+|--------------|--------------|
+| walk         | 108.43       |
+| idle         | 72.90        |
+| cycling      | 64.18        |
+| running      | 32.94        |
+| stairs_up    | 28.82        |
+| stairs_down  | 24.82        |
+
+### Note on Data Imbalance
+The dataset is imbalanced, with more data for walking and idle activities. This reflects real-world behavior, as walking and being idle are more common in daily life compared to activities like running or climbing stairs. This natural imbalance provides a realistic representation of daily human activity patterns and is important to consider in downstream analysis and modeling. 

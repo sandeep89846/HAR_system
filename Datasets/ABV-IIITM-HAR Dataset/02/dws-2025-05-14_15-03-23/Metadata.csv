@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs,standardisation
+3,iPhone 13,1747235003572,2025-05-14_15-03-23,Asia/Kolkata,ios,1.43.2,9f9e3c5d-8727-4b9f-adab-4d9b8e3ed6c3,Accelerometer|Gyroscope|Annotation|GyroscopeUncalibrated|AccelerometerUncalibrated,10|10||10|10,false

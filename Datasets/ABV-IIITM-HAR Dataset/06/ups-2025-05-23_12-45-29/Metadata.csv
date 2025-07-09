@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs,standardisation
+3,Redmi Note 7S,1748004329275,2025-05-23_12-45-29,Asia/Kolkata,android,1.43.2,88cd33aa-0495-4df0-baa3-f1929e33b977,Accelerometer|Gravity|Gyroscope|Annotation|TotalAcceleration|GyroscopeUncalibrated|AccelerometerUncalibrated,10|10|10||10|10|10,false

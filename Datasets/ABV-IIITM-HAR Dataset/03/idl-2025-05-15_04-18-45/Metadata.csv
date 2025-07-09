@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs,standardisation
+3,RMX3241,1747282725563,2025-05-15_04-18-45,Asia/Kolkata,android,1.43.2,5a592300-ad26-4daa-b25c-0d400d9feaa5,Accelerometer|Gravity|Gyroscope|Annotation|TotalAcceleration|GyroscopeUncalibrated|AccelerometerUncalibrated,10|10|10||10|10|10,false
