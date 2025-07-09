@@ -50,8 +50,6 @@ This dataset contains smartphone sensor data collected from multiple participant
 
 ## Data Coverage per Activity
 
-![Total Minutes of Sensor Data per Activity](./minutes_per_activity.png)
-
 | Activity     | Total Minutes |
 |--------------|--------------|
 | walk         | 108.43       |
