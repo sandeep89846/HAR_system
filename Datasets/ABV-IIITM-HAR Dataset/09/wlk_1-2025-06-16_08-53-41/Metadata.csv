@@ -1,0 +1,2 @@
+version,device name,recording epoch time,recording time,recording timezone,platform,appVersion,device id,sensors,sampleRateMs,standardisation
+3,SM-M315F,1750064021666,2025-06-16_08-53-41,Asia/Kolkata,android,1.43.2,9a95b101-07de-4bcc-8f26-38d59da29652,Accelerometer|Gravity|Gyroscope|Annotation|TotalAcceleration|GyroscopeUncalibrated|AccelerometerUncalibrated,10|10|10||10|10|10,false
